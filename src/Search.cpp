@@ -21,7 +21,7 @@ using namespace std;
 using namespace __gnu_cxx;
 using namespace GraphOperations;
 using namespace SearchAlgorithms;
-extern Statistics stat;
+Statistics stat;
 void printVector(vector<int> vec) 
 {
   int i;
