@@ -3,7 +3,7 @@
 using namespace Generate;
 using namespace SearchAlgorithms;
 
-SearchAlgorithms::ORDERING_HEURISTIC ordering_heuristic = MINFILL;
+SearchAlgorithms::ORDERING_HEURISTIC ordering_heuristic;
 
 // convert adjmat repr to quickbb internal graph struct
 std::vector<std::vector<int>> extract_adjmat(rust::Vec<Row> flatmat)	{
@@ -18,6 +18,7 @@ std::vector<std::vector<int>> extract_adjmat(rust::Vec<Row> flatmat)	{
 		i++;
 	}
 
+	/*
 	std::cout << "converted adjmat: " << "\n";
 	for (std::vector<int> v : mat)	{
 		for (int i : v)	{
@@ -25,28 +26,30 @@ std::vector<std::vector<int>> extract_adjmat(rust::Vec<Row> flatmat)	{
 		}
 		std::cout << std::endl;
 	}
+	*/
 
 	return mat;
 }
 
 // run algo
-int32_t quickbb(rust::Vec<Row> flatmat, int32_t time_bound, SearchAlgorithms::ORDERING_HEURISTIC ordering_heuristic)	{
+int32_t quickbb(rust::Vec<Row> flatmat, int32_t time_bound, SearchAlgorithms::ORDERING_HEURISTIC oh)	{
+	ordering_heuristic = oh;
 
 	std::cout << "start quickbb subroutine" << "\n";
 	std::vector<std::vector<int>> m = extract_adjmat(flatmat);
-	std::cout << "adjmat extracted" << "\n";
+	//std::cout << "adjmat extracted" << "\n";
 	Graph g{m};
-	std::cout << "init c++ graph" << "\n";
-	g.printGraph();
+	//std::cout << "init c++ graph" << "\n";
+	//g.printGraph();
 
 	int32_t bound = g.getNumVertices();
-	std::cout << "num vertices: " << bound << "\n";
+	//std::cout << "num vertices: " << bound << "\n";
 
 	Search s;
 	bound = s.branchAndBound(g, bound, time_bound);
 
-	std::cout << "out: " << bound << "\n";
-
+	//std::cout << "out: " << bound << "\n";
+	std::cout << "quickbb return" << "\n";
 	return bound;
 }
 
