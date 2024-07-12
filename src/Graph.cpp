@@ -57,7 +57,7 @@ GraphOperations::Graph::Graph(vector<vector<int> > &matrix)
     for(j=0;j<n-1;j++)
       if(matrix[i][j] == 1) {
 #ifdef DEBUG
-	cout<<"Adding edge"<<i<<" "<<j<<"\n";
+	cout<<"Adding edge"<<i<<" "<<j<<std::endl;
 #endif
 	addEdge(i+1,j+1);
       }
@@ -69,14 +69,14 @@ int GraphOperations::Graph::addVertex(int i)
 {
   int j;
 #ifdef DEBUG
-  cout<<"Here3\n";
+  cout<<"Here3"<<endl;
 #endif
   // Reset any edges that the current vertex may have
   for(j=0;j<adjMatrix[i].size();j++){
     deleteEdge(i,j);
   }
 #ifdef DEBUG
-  cout<<"Here2\n";
+  cout<<"Here2"<<endl;
 #endif
   // Activate the vertex if it is inactive and add it to the vertexlist
   if(vertex[i]->value== INACTIVE){
@@ -91,7 +91,7 @@ int GraphOperations::Graph::addVertex(int i)
     numVertices=numVertices+1;
   }
 #ifdef DEBUG
-  cout<<"Here 1 \n";
+  cout<<"Here 1 "<<endl;
 #endif
   return 1;
 }
@@ -107,7 +107,7 @@ int GraphOperations::Graph::addEdge(int i, int j)
     addVertex(j);
   }
 #ifdef DEBUG
-  cout<<"Here\n";
+  cout<<"Here"<<endl;
 #endif
   if(adjMatrix[i][j]->value!=1){
     adjMatrix[i][j]->Reset(j);
@@ -120,7 +120,7 @@ int GraphOperations::Graph::addEdge(int i, int j)
     if(temp!=NULL) temp->prev=adjMatrix[i][j];
     adjMatrix[i][0]->number=adjMatrix[i][0]->number+1;
   }
-  
+
   if(adjMatrix[j][i]->value!=1){
     adjMatrix[j][i]->Reset(i);
     adjMatrix[j][i]->value=1;
@@ -132,6 +132,7 @@ int GraphOperations::Graph::addEdge(int i, int j)
     if(temp!=NULL) temp->prev=adjMatrix[j][i];
     adjMatrix[j][0]->number=adjMatrix[j][0]->number+1;
   }
+	return 0;
 }
 int GraphOperations::Graph::addEdges(vector<Edge> &edges)
 {
@@ -143,6 +144,7 @@ int GraphOperations::Graph::addEdges(vector<Edge> &edges)
     addEdge(e.v1,e.v2);
     curr++;
   }
+	return 0;
 }
 int GraphOperations::Graph::addEdges(list<Edge> &edges)
 {
@@ -154,6 +156,7 @@ int GraphOperations::Graph::addEdges(list<Edge> &edges)
     addEdge(e.v1,e.v2);
     curr++;
   }
+	return 0;
 }
 
 int GraphOperations::Graph::deleteEdges(vector<Edge> &edges)
@@ -166,6 +169,7 @@ int GraphOperations::Graph::deleteEdges(vector<Edge> &edges)
     deleteEdge(e.v1,e.v2);
     curr++;
   }
+	return 0;
 }
 
 int GraphOperations::Graph::deleteEdges(list<Edge> &edges)
@@ -178,6 +182,7 @@ int GraphOperations::Graph::deleteEdges(list<Edge> &edges)
     deleteEdge(e.v1,e.v2);
     curr++;
   }
+	return 0;
 }
 
 
@@ -227,6 +232,7 @@ int GraphOperations::Graph::deleteVertex(int i)
     vertex[i]->Reset(i);
     numVertices=numVertices-1;
   }
+	return 0;
 }
 
 
@@ -881,6 +887,7 @@ vector<int> GraphOperations::Graph::minDegreeBBOrdering()
           ordering[count++]=where_to_put[j];
 
       }
+	return ordering;
   }
 // Returns a list in which the vertices are sorted based on the number of edges
 // added by each in triangulation

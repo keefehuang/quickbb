@@ -136,7 +136,7 @@ int Node::expandNode(int bound, Graph &graph,
 #endif
 
   generateChildren(bound,graph);
-  
+	return 0;
 }
             
 /*
